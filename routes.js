@@ -1,15 +1,11 @@
-app.get('/', (req, res) => {
-  res.send('enviando dados');
-});
-app.get('/outro', (req, res) => {
+import express from "express";
+import { createUser, deleteUser, getAllUsers, updateUser } from "./handlers";
+const router = express.Router();
+
+router.route("/").get(getAllUsers).post(createUser).put(updateUser).delete(deleteUser);
+
+router.route("/outro").get((req, res) => {
   res.json({status: "success"});
-});
-app.post('/', (req, res) => {
-  res.send('criando dados');
-});
-app.put('/', (req, res) => {
-  res.send('atualizando dados');
-});
-app.delete('/', (req, res) => {
-  res.send('apagando dados');
-});
+})
+
+export default router
